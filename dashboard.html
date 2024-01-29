@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TIME INSITUTE</title>
+    <link rel="stylesheet" href="main.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div id="time_header">
+      <a class="header_logo">
+        <img
+          src="https://time.edu.vn/wp-content/uploads/2024/01/Screenshot-2024-01-29-104140.png"
+          alt="Logo TIME Insitute"
+        />
+        <!-- <span>FREE COURSE</span> -->
+      </a>
+      <div class="header_search">
+        <div>
+          <input id="search_input" placeholder="Tìm tên khóa học" />
+          <button onclick="handleFindPopup()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        <div class="header_result"></div>
+      </div>
+      <div class="header_info">
+        <div class="header_sign">
+          <a
+            onclick="handleSignPopup('signin')"
+            href="javascript:;"
+            class="time_button dark"
+            >Đăng nhập</a
+          >
+          <a
+            onclick="handleSignPopup('signup')"
+            href="javascript:;"
+            class="time_button light"
+            >Đăng ký</a
+          >
+        </div>
+        <div class="header_signed">
+          <div class="signed_alert" onclick="handleAlertPopup()">
+            <i class="fa-solid fa-bell"></i>
+          </div>
+          <div class="signed_name">Trọng Phúc</div>
+          <div class="signed_info">
+            <img
+              onclick="handleInfoPopup()"
+              alt="Name_avatar"
+              id="infoPopup"
+              src="https://graph.facebook.com/137100695280679/picture?width=400&height=400"
+            />
+          </div>
+          <div class="header_detail">
+            <div class="detail_info">
+              <div>
+                <img
+                  src="https://graph.facebook.com/137100695280679/picture?width=400&height=400"
+                />
+              </div>
+              <div>
+                <h5>Trọng Phúc</h5>
+                <p>@3105trongphuc</p>
+              </div>
+            </div>
+            <div class="detail_certi">
+              <a href="./profile.html"> Cá nhân</a>
+              <a href="./my_course.html"> Khóa học của tôi</a>
+              <a href="#">Chứng nhận</a>
+            </div>
+            <div class="detail_setting">
+              <a href="#">Cài đặt</a>
+              <a href="#" onclick="handleLogout()">Đăng xuất </a>
+            </div>
+          </div>
+          <div class="header_alert_new">
+            <div class="header_alert_new_header">
+              <h4>Thông báo</h4>
+              <i class="fa-solid fa-trash-can"></i>
+            </div>
+            <a href="#" class="detail_alert_info">
+              <div>
+                <img
+                  src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                />
+              </div>
+              <div>
+                <h5>Khóa học mới</h5>
+                <p>Quản trị kinh doanh</p>
+              </div>
+            </a>
+            <a href="#" class="detail_alert_info">
+              <div>
+                <img
+                  src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                />
+              </div>
+              <div>
+                <h5>Khóa học mới</h5>
+                <p>Quản trị kinh doanh</p>
+              </div>
+            </a>
+            <a href="#" class="detail_alert_info">
+              <div>
+                <img
+                  src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                />
+              </div>
+              <div>
+                <h5>Khóa học mới</h5>
+                <p>Quản trị kinh doanh</p>
+              </div>
+            </a>
+            <a href="#" class="detail_alert_info">
+              <div>
+                <img
+                  src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                />
+              </div>
+              <div>
+                <h5>Khóa học mới</h5>
+                <p>Quản trị kinh doanh</p>
+              </div>
+            </a>
+            <a href="#" class="detail_alert_info">
+              <div>
+                <img
+                  src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                />
+              </div>
+              <div>
+                <h5>Khóa học mới</h5>
+                <p>Quản trị kinh doanh</p>
+              </div>
+            </a>
+            <a href="#" class="detail_alert_info">
+              <div>
+                <img
+                  src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                />
+              </div>
+              <div>
+                <h5>Khóa học mới</h5>
+                <p>Quản trị kinh doanh</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sign" class="">
+      <div class="sign_overlay" onclick="cancelSignPopup()"></div>
+      <div class="sign_inner singin">
+        <div>
+          <h2 class="sign_title">
+            Đăng nhập
+            <a
+              href="javascript:;"
+              class="sign_up"
+              onclick="handleSignPopup('signup')"
+              >Đăng ký <i class="fa-solid fa-chevron-right"></i
+            ></a>
+            <i
+              onclick="cancelSignPopup()"
+              class="fa-solid fa-xmark sign_close"
+            ></i>
+          </h2>
+        </div>
+        <div class="sign_form">
+          <form>
+            <label class="sign_input">
+              <p><i class="fa-solid fa-at"></i> Địa chỉ email</p>
+              <input type="email" placeholder="Mật khẩu" />
+            </label>
+            <label class="sign_input">
+              <p><i class="fa-solid fa-key"></i> Mật khẩu</p>
+              <input type="password" placeholder="Mật khẩu" />
+            </label>
+            <a href="#" class="sign_forgot" onclick="handleSignPopup('forgot')"
+              >Quên mật khẩu
+              <i
+                title="Mật khẩu sẽ gửi đến email"
+                class="fa-regular fa-circle-question"
+              ></i
+            ></a>
+            <a href="#" class="sign_button"
+              ><i class="fa-solid fa-chevron-right"></i
+            ></a>
+          </form>
+        </div>
+      </div>
+      <div class="sign_inner signup">
+        <div>
+          <h2 class="sign_title">
+            Đăng ký
+            <a
+              href="javascript:;"
+              class="sign_up"
+              onclick="handleSignPopup('signin')"
+              >Đăng nhập <i class="fa-solid fa-chevron-right"></i
+            ></a>
+            <i
+              onclick="cancelSignPopup()"
+              class="fa-solid fa-xmark sign_close"
+            ></i>
+          </h2>
+        </div>
+        <div class="sign_form">
+          <form>
+            <label class="sign_input">
+              <p><i class="fa-solid fa-at"></i> Địa chỉ email</p>
+              <input type="email" placeholder="Mật khẩu" />
+            </label>
+            <label class="sign_input">
+              <p><i class="fa-solid fa-key"></i> Mật khẩu</p>
+              <input type="password" placeholder="Mật khẩu" />
+            </label>
+            <label class="sign_input">
+              <p><i class="fa-solid fa-key"></i> Nhập lại mật khẩu</p>
+              <input type="password" placeholder="Nhập lại mật khẩu" />
+            </label>
+            <label class="sign_input">
+              <p><i class="fa-solid fa-signature"></i> Họ và tên</p>
+              <input type="text" placeholder="Họ và tên" />
+            </label>
+            <p class="sign_forgot">
+              Bằng cách ấn nút đăng ký bạn đã đồng ý với
+              <a href="#"><b>Điều khoản & sử dụng</b></a> của TIME Institute
+            </p>
+            <a href="#" class="sign_button"
+              ><i class="fa-solid fa-chevron-right"></i
+            ></a>
+          </form>
+        </div>
+      </div>
+      <div class="sign_inner forgot">
+        <div>
+          <h2 class="sign_title">
+            <span>Quên mật khẩu</span> <span></span>
+            <i
+              onclick="cancelSignPopup()"
+              class="fa-solid fa-xmark sign_close"
+            ></i>
+          </h2>
+        </div>
+        <div class="sign_form">
+          <form>
+            <label class="sign_input">
+              <p><i class="fa-solid fa-at"></i> Địa chỉ email</p>
+              <input type="password" placeholder="Email đăng ký" />
+            </label>
+            <p class="sign_forgot">
+              Mật khẩu sẽ được gửi qua Email đăng ký ban đầu của bạn.
+            </p>
+            <a href="#" class="sign_button"
+              ><i class="fa-solid fa-chevron-right"></i
+            ></a>
+          </form>
+        </div>
+      </div>
+      <div class="sign_inner success">
+        <div>
+          <h2 class="sign_title">
+            <span>Đăng ký thành công </span>
+            <span></span>
+          </h2>
+        </div>
+        <div class="sign_form">
+          <form>
+            <label class="sign_input">
+              <p></p>
+            </label>
+            <p class="sign_forgot success">Ấn tiếp tục để <b>Đăng nhập</b></p>
+            <a href="#" class="sign_button"
+              ><i class="fa-solid fa-chevron-right"></i
+            ></a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="time_sidebar">
+      <ul>
+        <li class="active">
+          <a href="./dashboard.html"
+            ><i class="fa-solid fa-user-graduate"></i> <span>Cá nhân</span></a
+          >
+        </li>
+        <li class="">
+          <a href="./index.html"
+            ><i class="fa-solid fa-book"></i> <span>Khóa học</span></a
+          >
+        </li>
+        <li>
+          <a href="./index.html"
+            ><i class="fa-solid fa-graduation-cap"></i> <span>Lộ trình</span></a
+          >
+        </li>
+        <li class="">
+          <a href="./ranking.html"
+            ><i class="fa-solid fa-ranking-star"></i> <span>Xếp hạng</span></a
+          >
+        </li>
+      </ul>
+    </div>
+    <div id="time_content">
+      <div class="time_dashboard">
+        <div class="time_dashboard_hello">
+          <div>
+            <div class="hello_container">
+              <p class="time_dashboard_hello_date"></p>
+              <h1 class="time_dashboard_hello_h1">Xin chào, Trọng Phúc</h1>
+            </div>
+            <div>Bạn vừa học khóa:</div>
+            <div class="my_course_list_item">
+              <div>
+                <img
+                  src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                />
+              </div>
+              <div class="my_course_name">
+                <h3><a>Quản trị doanh nghiệp</a></h3>
+                <span>
+                  <b>11/30</b>
+                  <span>bài học</span>
+                </span>
+                <p>
+                  <span class="my_course_progress"></span> <span>20% </span>
+                </p>
+              </div>
+              <div class="my_course_button">
+                <a class="active" href="./course.html">
+                  <i class="fa-solid fa-play"></i>Học tiếp
+                </a>
+                <!-- <p><i class="fa-solid fa-rotate-left"></i> Xem lại</p> -->
+              </div>
+            </div>
+          </div>
+          <div>
+            <img src="./img/5437683.jpg" />
+          </div>
+        </div>
+        <div class="time_dashboard_info">
+          <div>
+            <div class="my_course_select">
+              <p class="active">Khóa đang học</p>
+              <p>Đã hoàn thành</p>
+            </div>
+            <div class="my_course_list">
+              <div class="my_course_list_item">
+                <div>
+                  <img
+                    src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                  />
+                </div>
+                <div class="my_course_name">
+                  <h3><a>Logistics</a></h3>
+                  <span>
+                    <b>11/30</b>
+                    <span>bài học</span>
+                  </span>
+                  <p>
+                    <span class="my_course_progress"></span> <span>20% </span>
+                  </p>
+                </div>
+                <div class="my_course_button">
+                  <a href="./course.html"
+                    ><i class="fa-solid fa-play"></i> Học tiếp
+                  </a>
+                  <!-- <p><i class="fa-solid fa-rotate-left"></i> Xem lại</p> -->
+                </div>
+              </div>
+              <div class="my_course_list_item">
+                <div>
+                  <img
+                    src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                  />
+                </div>
+                <div class="my_course_name">
+                  <h3><a>Quản trị Marketing</a></h3>
+                  <span>
+                    <b>11/30</b>
+                    <span>bài học</span>
+                  </span>
+                  <p>
+                    <span class="my_course_progress"></span> <span>100% </span>
+                  </p>
+                </div>
+                <div class="my_course_date">
+                  <a href="#" class="">Hoàn thành: 20/01/2024 </a>
+                  <!-- <p><i class="fa-solid fa-rotate-left"></i> Xem lại</p> -->
+                </div>
+              </div>
+              <div class="my_course_list_item">
+                <div>
+                  <img
+                    src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                  />
+                </div>
+                <div class="my_course_name">
+                  <h3><a>Quản trị Marketing</a></h3>
+                  <span>
+                    <b>11/30</b>
+                    <span>bài học</span>
+                  </span>
+                  <p>
+                    <span class="my_course_progress"></span> <span>100% </span>
+                  </p>
+                </div>
+                <div class="my_course_date">
+                  <a href="#" class="">Hoàn thành: 20/01/2024 </a>
+                  <!-- <p><i class="fa-solid fa-rotate-left"></i> Xem lại</p> -->
+                </div>
+              </div>
+              <div class="my_course_list_item">
+                <div>
+                  <img
+                    src="https://time.edu.vn/wp-content/uploads/2023/07/pexels-photo-5212339-500x400.jpeg"
+                  />
+                </div>
+                <div class="my_course_name">
+                  <h3><a>Quản trị Marketing</a></h3>
+                  <span>
+                    <b>11/30</b>
+                    <span>bài học</span>
+                  </span>
+                  <p>
+                    <span class="my_course_progress"></span> <span>100% </span>
+                  </p>
+                </div>
+                <div class="my_course_date">
+                  <a href="#" class="">Hoàn thành: 20/01/2024 </a>
+                  <!-- <p><i class="fa-solid fa-rotate-left"></i> Xem lại</p> -->
+                </div>
+              </div>
+              <div class="list_emty">
+                <img
+                  src="https://cdn.dribbble.com/users/310943/screenshots/2792692/empty-state-illustrations.gif"
+                  alt=""
+                />
+                <h5>
+                  Hãy tìm ngay cho mình 1 khóa học <a href="#">tại đây</a> nhé!
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="profile_number">
+              <div class="profile_number_card">
+                <div>
+                  <span>Thời gian học</span>
+                  <p>1400 <span>giờ</span></p>
+                  <span
+                    ><i class="fa-solid fa-sort-up card_icon_up"></i> Trên 80%
+                    bạn học <span></span
+                  ></span>
+                </div>
+                <div><i class="fa-solid fa-clock"></i></div>
+              </div>
+
+              <div class="profile_number_wrap">
+                <div class="profile_number_card">
+                  <div>
+                    <span class="card_headline">Khóa học</span>
+                    <p class="card_count">36</p>
+                    <span class="card_notify"
+                      ><i class="fa-solid fa-book card_icon_like"></i>
+                      Chăm chỉ
+                    </span>
+                  </div>
+                  <!-- <div><i class="fa-solid fa-clock"></i></div> -->
+                </div>
+                <div class="profile_number_card">
+                  <div>
+                    <span class="card_headline">Hoàn thành</span>
+                    <p class="card_count">36</p>
+                    <span class="card_notify"
+                      ><i class="fa-solid fa-thumbs-up card_icon_like"></i> 80%
+                      luôn!!!
+                    </span>
+                  </div>
+                  <!-- <div><i class="fa-solid fa-clock"></i></div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./mainscript.js"></script>
+  <script src="./renderUI.js"></script>
+</html>

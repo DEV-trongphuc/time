@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap");
+
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      background: hsl(0, 0%, 95%);
+      color: hsl(0, 0%, 20%);
+      font-family: "Ubuntu", sans-serif;
+      /* center the content in the viewport */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loader.svelte-1qbmwv8 {
+      color: #ffb606;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    svg#loader.svelte-1qbmwv8 {
+      width: 180px;
+      height: auto;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    svg#progress.svelte-1qbmwv8 {
+      width: 250px;
+      height: auto;
+      display: block;
+    }
+    .rotate.svelte-1qbmwv8 {
+      transform: rotate(0deg);
+      animation: svelte-1qbmwv8-rotate 3.5s
+        cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    #translate.svelte-1qbmwv8 {
+      transform: translateY(0px);
+      animation: svelte-1qbmwv8-translate 3.5s
+        cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    @keyframes svelte-1qbmwv8-rotate {
+      5% {
+        transform: rotate(60deg);
+      }
+      100% {
+        transform: rotate(-60deg);
+      }
+    }
+    @keyframes svelte-1qbmwv8-translate {
+      5%,
+      95% {
+        transform: translateY(12px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    #face.svelte-1qbmwv8 {
+      transform: scaleY(1);
+      animation: svelte-1qbmwv8-scaleFace 3.5s
+        cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    #mouth.svelte-1qbmwv8,
+    #cheek.svelte-1qbmwv8 {
+      transform: scale(1);
+      animation: svelte-1qbmwv8-scaleGrin 3.5s
+        cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    @keyframes svelte-1qbmwv8-scaleFace {
+      5% {
+        transform: scale(0.7);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes svelte-1qbmwv8-scaleGrin {
+      5% {
+        transform: scale(0.5);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    .particle.svelte-1qbmwv8 {
+      transform: translateY(0px) scale(1);
+      animation: svelte-1qbmwv8-sparkle 1.25s
+        cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+      animation-delay: 2.5s;
+    }
+    #particles.svelte-1qbmwv8 g:nth-of-type(1) .particle.svelte-1qbmwv8 {
+      animation-delay: 2.86s;
+    }
+    #particles.svelte-1qbmwv8 g:nth-of-type(2) .particle.svelte-1qbmwv8 {
+      animation-delay: 2.92s;
+    }
+    @keyframes svelte-1qbmwv8-sparkle {
+      0% {
+        transform: translateY(15px) scale(0);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0;
+      }
+      90% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1);
+      }
+      100% {
+        transform: translateY(0px) scale(1);
+        opacity: 0;
+      }
+    }
+    #clip-bar.svelte-1qbmwv8 {
+      transform: translateX(-120px);
+      animation: svelte-1qbmwv8-translateClip 3.5s
+        cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
+    }
+    @keyframes svelte-1qbmwv8-translateClip {
+      100% {
+        transform: translateX(0);
+      }
+    }
+    .controls.svelte-1nqrb1f {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem;
+      min-width: 200px;
+    }
+    .controls button + button.svelte-1nqrb1f {
+      margin-top: 1rem;
+    }
+    button.svelte-1nqrb1f {
+      box-shadow: 0 1px 5px -3px hsl(0, 0%, 25%);
+      flex-grow: 1;
+      background: none;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 20px;
+      background: hsl(0, 0%, 100%);
+      font-family: inherit;
+    }
+    .deck.svelte-10bsf6b {
+      perspective: 1000px;
+      position: relative;
+      height: 250px;
+      width: 250px;
+      border-radius: 20px;
+    }
+    .card.svelte-10bsf6b {
+      padding: 5rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transform-style: preserve-3d;
+    }
+    .card__front.svelte-10bsf6b,
+    .card__back.svelte-10bsf6b {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0.25rem;
+      border-radius: inherit;
+      background: hsl(0, 0%, 100%);
+      box-shadow: 0 0 10px -9px hsl(0, 0%, 25%), 0 0 3px -2px hsl(0, 0%, 25%);
+    }
+    .card__front.svelte-10bsf6b h1.svelte-10bsf6b {
+      font-size: 5rem;
+    }
+    .card__back.svelte-10bsf6b h2.svelte-10bsf6b {
+      font-size: 2.25rem;
+    }
+    .card__back.svelte-10bsf6b {
+      transform: rotateY(180deg);
+    }
+    .card.flip.svelte-10bsf6b {
+      transform: rotateY(-180deg);
+    }
+  </style>
+  <body></body>
+  <script>
+    var app = (function () {
+      "use strict";
+      function t() {}
+      const e = (t) => t;
+      function n(t) {
+        return t();
+      }
+      function r() {
+        return Object.create(null);
+      }
+      function s(t) {
+        t.forEach(n);
+      }
+      function a(t) {
+        return "function" == typeof t;
+      }
+      function c(t, e) {
+        return t != t
+          ? e == e
+          : t !== e || (t && "object" == typeof t) || "function" == typeof t;
+      }
+      function o(t) {
+        return null == t ? "" : t;
+      }
+      const i = "undefined" != typeof window;
+      let l = i ? () => window.performance.now() : () => Date.now(),
+        u = i ? (t) => requestAnimationFrame(t) : t;
+      const f = new Set();
+      let d,
+        h = !1;
+      function p() {
+        f.forEach((t) => {
+          t[0](l()) || (f.delete(t), t[1]());
+        }),
+          (h = f.size > 0) && u(p);
+      }
+      function m(t) {
+        let e;
+        return (
+          h || ((h = !0), u(p)),
+          {
+            promise: new Promise((n) => {
+              f.add((e = [t, n]));
+            }),
+            abort() {
+              f.delete(e);
+            },
+          }
+        );
+      }
+      function v(t, e) {
+        t.appendChild(e);
+      }
+      function $(t, e, n) {
+        t.insertBefore(e, n || null);
+      }
+      function g(t) {
+        t.parentNode.removeChild(t);
+      }
+      function b(t) {
+        return document.createElement(t);
+      }
+      function y(t) {
+        return document.createElementNS("http://www.w3.org/2000/svg", t);
+      }
+      function w(t) {
+        return document.createTextNode(t);
+      }
+      function x() {
+        return w(" ");
+      }
+      function k(t, e, n, r) {
+        return (
+          t.addEventListener(e, n, r), () => t.removeEventListener(e, n, r)
+        );
+      }
+      function q(t, e, n) {
+        null == n ? t.removeAttribute(e) : t.setAttribute(e, n);
+      }
+      function C(t, e) {
+        (e = "" + e), t.data !== e && (t.data = e);
+      }
+      function _(t, e) {
+        const n = document.createEvent("CustomEvent");
+        return n.initCustomEvent(t, !1, !1, e), n;
+      }
+      let E,
+        F = 0,
+        M = {};
+      function S(t, e, n, r, s, a, c, o = 0) {
+        const i = 16.666 / r;
+        let l = "{\n";
+        for (let t = 0; t <= 1; t += i) {
+          const r = e + (n - e) * a(t);
+          l += 100 * t + `%{${c(r, 1 - r)}}\n`;
+        }
+        const u = l + `100% {${c(n, 1 - n)}}\n}`,
+          f = `__svelte_${(function (t) {
+            let e = 5381,
+              n = t.length;
+            for (; n--; ) e = ((e << 5) - e) ^ t.charCodeAt(n);
+            return e >>> 0;
+          })(u)}_${o}`;
+        if (!M[f]) {
+          if (!d) {
+            const t = b("style");
+            document.head.appendChild(t), (d = t.sheet);
+          }
+          (M[f] = !0), d.insertRule(`@keyframes ${f} ${u}`, d.cssRules.length);
+        }
+        const h = t.style.animation || "";
+        return (
+          (t.style.animation = `${
+            h ? `${h}, ` : ""
+          }${f} ${r}ms linear ${s}ms 1 both`),
+          (F += 1),
+          f
+        );
+      }
+      function z(t, e) {
+        (t.style.animation = (t.style.animation || "")
+          .split(", ")
+          .filter(
+            e ? (t) => t.indexOf(e) < 0 : (t) => -1 === t.indexOf("__svelte")
+          )
+          .join(", ")),
+          e &&
+            !--F &&
+            u(() => {
+              if (F) return;
+              let t = d.cssRules.length;
+              for (; t--; ) d.deleteRule(t);
+              M = {};
+            });
+      }
+      function N(t) {
+        E = t;
+      }
+      function j() {
+        const t = E;
+        return (e, n) => {
+          const r = t.$$.callbacks[e];
+          if (r) {
+            const s = _(e, n);
+            r.slice().forEach((e) => {
+              e.call(t, s);
+            });
+          }
+        };
+      }
+      const L = [],
+        O = [],
+        A = [],
+        P = [],
+        R = Promise.resolve();
+      let B,
+        T = !1;
+      function H(t) {
+        A.push(t);
+      }
+      function I() {
+        const t = new Set();
+        do {
+          for (; L.length; ) {
+            const t = L.shift();
+            N(t), Y(t.$$);
+          }
+          for (; O.length; ) O.pop()();
+          for (let e = 0; e < A.length; e += 1) {
+            const n = A[e];
+            t.has(n) || (n(), t.add(n));
+          }
+          A.length = 0;
+        } while (L.length);
+        for (; P.length; ) P.pop()();
+        T = !1;
+      }
+      function Y(t) {
+        t.fragment &&
+          (t.update(t.dirty),
+          s(t.before_update),
+          t.fragment.p(t.dirty, t.ctx),
+          (t.dirty = null),
+          t.after_update.forEach(H));
+      }
+      function Z() {
+        return (
+          B ||
+            (B = Promise.resolve()).then(() => {
+              B = null;
+            }),
+          B
+        );
+      }
+      function D(t, e, n) {
+        t.dispatchEvent(_(`${e ? "intro" : "outro"}${n}`));
+      }
+      const G = new Set();
+      let J;
+      function K() {
+        J = { r: 0, c: [], p: J };
+      }
+      function Q() {
+        J.r || s(J.c), (J = J.p);
+      }
+      function U(t, e) {
+        t && t.i && (G.delete(t), t.i(e));
+      }
+      function V(t, e, n, r) {
+        if (t && t.o) {
+          if (G.has(t)) return;
+          G.add(t),
+            J.c.push(() => {
+              G.delete(t), r && (n && t.d(1), r());
+            }),
+            t.o(e);
+        }
+      }
+      const W = { duration: 0 };
+      function X(n, r, s) {
+        let c,
+          o,
+          i = r(n, s),
+          u = !1,
+          f = 0;
+        function d() {
+          c && z(n, c);
+        }
+        function h() {
+          const {
+            delay: r = 0,
+            duration: s = 300,
+            easing: a = e,
+            tick: h = t,
+            css: p,
+          } = i || W;
+          p && (c = S(n, 0, 1, s, r, a, p, f++)), h(0, 1);
+          const v = l() + r,
+            $ = v + s;
+          o && o.abort(),
+            (u = !0),
+            H(() => D(n, !0, "start")),
+            (o = m((t) => {
+              if (u) {
+                if (t >= $) return h(1, 0), D(n, !0, "end"), d(), (u = !1);
+                if (t >= v) {
+                  const e = a((t - v) / s);
+                  h(e, 1 - e);
+                }
+              }
+              return u;
+            }));
+        }
+        let p = !1;
+        return {
+          start() {
+            p || (z(n), a(i) ? ((i = i()), Z().then(h)) : h());
+          },
+          invalidate() {
+            p = !1;
+          },
+          end() {
+            u && (d(), (u = !1));
+          },
+        };
+      }
+      function tt(n, r, c) {
+        let o,
+          i = r(n, c),
+          u = !0;
+        const f = J;
+        function d() {
+          const {
+            delay: r = 0,
+            duration: a = 300,
+            easing: c = e,
+            tick: d = t,
+            css: h,
+          } = i || W;
+          h && (o = S(n, 1, 0, a, r, c, h));
+          const p = l() + r,
+            v = p + a;
+          H(() => D(n, !1, "start")),
+            m((t) => {
+              if (u) {
+                if (t >= v)
+                  return d(0, 1), D(n, !1, "end"), --f.r || s(f.c), !1;
+                if (t >= p) {
+                  const e = c((t - p) / a);
+                  d(1 - e, e);
+                }
+              }
+              return u;
+            });
+        }
+        return (
+          (f.r += 1),
+          a(i)
+            ? Z().then(() => {
+                (i = i()), d();
+              })
+            : d(),
+          {
+            end(t) {
+              t && i.tick && i.tick(1, 0), u && (o && z(n, o), (u = !1));
+            },
+          }
+        );
+      }
+      function et(t, e) {
+        V(t, 1, 1, () => {
+          e.delete(t.key);
+        });
+      }
+      function nt(t, e, r) {
+        const {
+          fragment: c,
+          on_mount: o,
+          on_destroy: i,
+          after_update: l,
+        } = t.$$;
+        c.m(e, r),
+          H(() => {
+            const e = o.map(n).filter(a);
+            i ? i.push(...e) : s(e), (t.$$.on_mount = []);
+          }),
+          l.forEach(H);
+      }
+      function rt(t, e) {
+        t.$$.fragment &&
+          (s(t.$$.on_destroy),
+          t.$$.fragment.d(e),
+          (t.$$.on_destroy = t.$$.fragment = null),
+          (t.$$.ctx = {}));
+      }
+      function st(t, e) {
+        t.$$.dirty ||
+          (L.push(t), T || ((T = !0), R.then(I)), (t.$$.dirty = r())),
+          (t.$$.dirty[e] = !0);
+      }
+      function at(e, n, a, c, o, i) {
+        const l = E;
+        N(e);
+        const u = n.props || {},
+          f = (e.$$ = {
+            fragment: null,
+            ctx: null,
+            props: i,
+            update: t,
+            not_equal: o,
+            bound: r(),
+            on_mount: [],
+            on_destroy: [],
+            before_update: [],
+            after_update: [],
+            context: new Map(l ? l.$$.context : []),
+            callbacks: r(),
+            dirty: null,
+          });
+        let d = !1;
+        var h;
+        (f.ctx = a
+          ? a(
+              e,
+              u,
+              (t, n, r = n) => (
+                f.ctx &&
+                  o(f.ctx[t], (f.ctx[t] = r)) &&
+                  (f.bound[t] && f.bound[t](r), d && st(e, t)),
+                n
+              )
+            )
+          : u),
+          f.update(),
+          (d = !0),
+          s(f.before_update),
+          (f.fragment = c(f.ctx)),
+          n.target &&
+            (n.hydrate
+              ? f.fragment.l(((h = n.target), Array.from(h.childNodes)))
+              : f.fragment.c(),
+            n.intro && U(e.$$.fragment),
+            nt(e, n.target, n.anchor),
+            I()),
+          N(l);
+      }
+      let ct;
+      "undefined" != typeof HTMLElement &&
+        (ct = class extends HTMLElement {
+          constructor() {
+            super(), this.attachShadow({ mode: "open" });
+          }
+          connectedCallback() {
+            for (const t in this.$$.slotted)
+              this.appendChild(this.$$.slotted[t]);
+          }
+          attributeChangedCallback(t, e, n) {
+            this[t] = n;
+          }
+          $destroy() {
+            rt(this, 1), (this.$destroy = t);
+          }
+          $on(t, e) {
+            const n = this.$$.callbacks[t] || (this.$$.callbacks[t] = []);
+            return (
+              n.push(e),
+              () => {
+                const t = n.indexOf(e);
+                -1 !== t && n.splice(t, 1);
+              }
+            );
+          }
+          $set() {}
+        });
+      class ot {
+        $destroy() {
+          rt(this, 1), (this.$destroy = t);
+        }
+        $on(t, e) {
+          const n = this.$$.callbacks[t] || (this.$$.callbacks[t] = []);
+          return (
+            n.push(e),
+            () => {
+              const t = n.indexOf(e);
+              -1 !== t && n.splice(t, 1);
+            }
+          );
+        }
+        $set() {}
+      }
+      function it(t) {
+        return t < 0.5 ? 4 * t * t * t : 0.5 * Math.pow(2 * t - 2, 3) + 1;
+      }
+      function lt(t) {
+        const e = t - 1;
+        return e * e * e + 1;
+      }
+      function ut(
+        t,
+        {
+          delay: e = 0,
+          duration: n = 400,
+          easing: r = lt,
+          x: s = 0,
+          y: a = 0,
+          opacity: c = 0,
+        }
+      ) {
+        const o = getComputedStyle(t),
+          i = +o.opacity,
+          l = "none" === o.transform ? "" : o.transform,
+          u = i * (1 - c);
+        return {
+          delay: e,
+          duration: n,
+          easing: r,
+          css: (t, e) =>
+            `\n\t\t\ttransform: ${l} translate(${(1 - t) * s}px, ${
+              (1 - t) * a
+            }px);\n\t\t\topacity: ${i - u * e}`,
+        };
+      }
+      function ft(e) {
+        var n,
+          r,
+          s,
+          a,
+          c,
+          o,
+          i,
+          l,
+          u,
+          f,
+          d,
+          h,
+          p,
+          m,
+          w,
+          C,
+          _,
+          E,
+          F,
+          M,
+          S,
+          z,
+          N,
+          j,
+          L,
+          O,
+          A,
+          P,
+          R,
+          B,
+          T,
+          H,
+          I,
+          Y,
+          Z,
+          D,
+          G,
+          J,
+          K,
+          Q,
+          U,
+          V,
+          W,
+          X,
+          et,
+          nt,
+          rt;
+        return {
+          c() {
+            (n = b("section")),
+              (r = y("svg")),
+              (s = y("defs")),
+              (a = y("path")),
+              (c = y("g")),
+              (o = y("g")),
+              (i = y("g")),
+              (l = y("use")),
+              (u = y("g")),
+              (f = y("use")),
+              (d = y("g")),
+              (h = y("use")),
+              (p = y("use")),
+              (m = y("circle")),
+              (w = y("g")),
+              (C = y("g")),
+              (_ = y("g")),
+              (E = y("g")),
+              (F = y("g")),
+              (M = y("g")),
+              (S = y("g")),
+              (z = y("g")),
+              (N = y("path")),
+              (j = y("use")),
+              (L = y("g")),
+              (O = y("ellipse")),
+              (A = y("use")),
+              (P = y("g")),
+              (R = y("path")),
+              (B = y("g")),
+              (T = y("g")),
+              (H = y("ellipse")),
+              (I = y("use")),
+              (Z = x()),
+              (D = y("svg")),
+              (G = y("defs")),
+              (J = y("rect")),
+              (K = y("clipPath")),
+              (Q = y("use")),
+              (U = y("g")),
+              (V = y("use")),
+              (W = y("g")),
+              (X = y("use")),
+              q(a, "id", "particle"),
+              q(
+                a,
+                "d",
+                "M -3 0 a 3 3 0 0 0 3 -3 a 3 3 0 0 0 3 3 a 3 3 0 0 0 -3 3 a 3 3 0 0 0 -3 -3"
+              ),
+              q(a, "stroke", "currentColor"),
+              q(a, "stroke-width", "2"),
+              q(a, "stroke-linejoin", "round"),
+              q(a, "stroke-linecap", "round"),
+              q(l, "class", "particle svelte-1qbmwv8"),
+              q(l, "href", "#particle"),
+              q(f, "class", "particle svelte-1qbmwv8"),
+              q(f, "href", "#particle"),
+              q(u, "transform", "translate(-5 8) scale(0.6)"),
+              q(h, "class", "particle svelte-1qbmwv8"),
+              q(h, "href", "#particle"),
+              q(d, "transform", "translate(3 9) scale(0.8)"),
+              q(i, "id", "particles"),
+              q(i, "transform", "translate(35 -30)"),
+              q(i, "class", "svelte-1qbmwv8"),
+              q(p, "href", "#particles"),
+              q(p, "transform", "scale(-1 1) translate(0 -10)"),
+              q(o, "fill", "currentColor"),
+              q(m, "cx", "0"),
+              q(m, "cy", "0"),
+              q(m, "r", "35"),
+              q(m, "fill", "currentColor"),
+              q(N, "id", "brow"),
+              q(N, "d", "M -10.5 -25 a 2.5 2.5 0 0 1 5 0 a 4 4 0 0 0 -5 0"),
+              q(N, "stroke", "hsl(0, 0%, 0%)"),
+              q(N, "stroke-width", "1"),
+              q(N, "stroke-linejoin", "round"),
+              q(N, "stroke-linecap", "round"),
+              q(j, "href", "#brow"),
+              q(j, "transform", "scale(-1 1)"),
+              q(O, "id", "eye"),
+              q(O, "cx", "-8"),
+              q(O, "cy", "-12"),
+              q(O, "rx", "4"),
+              q(O, "ry", "8"),
+              q(A, "href", "#eye"),
+              q(A, "transform", "scale(-1 1)"),
+              q(z, "id", "face"),
+              q(z, "class", "svelte-1qbmwv8"),
+              q(S, "transform", "translate(0 10)"),
+              q(R, "id", "mouth"),
+              q(R, "d", "M 0 0 a 7 7 0 0 0 7 -7 h -14 a 7 7 0 0 0 7 7"),
+              q(R, "stroke", "hsl(0, 0%, 0%)"),
+              q(R, "stroke-width", "5"),
+              q(R, "stroke-linejoin", "round"),
+              q(R, "stroke-linecap", "round"),
+              q(R, "class", "svelte-1qbmwv8"),
+              q(P, "transform", "translate(0 18)"),
+              q(M, "fill", "hsl(0, 0%, 0%)"),
+              q(H, "id", "cheek"),
+              q(H, "cx", "-10"),
+              q(H, "cy", "-4"),
+              q(H, "rx", "4"),
+              q(H, "ry", "3.5"),
+              q(H, "class", "svelte-1qbmwv8"),
+              q(T, "id", "cheek-container"),
+              q(T, "transform", "translate(-7 10)"),
+              q(I, "href", "#cheek-container"),
+              q(I, "transform", "scale(-1 1)"),
+              q(B, "fill", "hsl(0, 0%, 100%)"),
+              q(F, "opacity", "0.3"),
+              q(E, "class", "rotate svelte-1qbmwv8"),
+              q(E, "transform", "rotate(0)"),
+              q(_, "transform", "scale(-1 1)"),
+              q(C, "id", "translate"),
+              q(C, "transform", "translate(0 0)"),
+              q(C, "class", "svelte-1qbmwv8"),
+              q(w, "class", "rotate svelte-1qbmwv8"),
+              q(w, "transform", "rotate(0)"),
+              q(c, "transform", "translate(50 50)"),
+              q(r, "id", "loader"),
+              q(r, "viewBox", "0 0 100 100"),
+              q(r, "width", "180"),
+              q(r, "height", "180"),
+              q(r, "class", "svelte-1qbmwv8"),
+              q(J, "id", "bar"),
+              q(J, "rx", "5"),
+              q(J, "x", "0"),
+              q(J, "y", "0"),
+              q(J, "width", "120"),
+              q(J, "height", "10"),
+              q(Q, "href", "#bar"),
+              q(K, "id", "clip"),
+              q(V, "href", "#bar"),
+              q(V, "opacity", "0.3"),
+              q(X, "id", "clip-bar"),
+              q(X, "transform", "translate(-120 0)"),
+              q(X, "href", "#bar"),
+              q(X, "class", "svelte-1qbmwv8"),
+              q(W, "clip-path", "url(#clip)"),
+              q(U, "fill", "currentColor"),
+              q(D, "id", "progress"),
+              q(D, "viewBox", "0 0 120 10"),
+              q(D, "width", "240"),
+              q(D, "height", "20"),
+              q(D, "class", "svelte-1qbmwv8"),
+              q(n, "class", "loader svelte-1qbmwv8"),
+              (rt = k(n, "animationend", e.finish, { once: !0 }));
+          },
+          m(t, e) {
+            $(t, n, e),
+              v(n, r),
+              v(r, s),
+              v(s, a),
+              v(r, c),
+              v(c, o),
+              v(o, i),
+              v(i, l),
+              v(i, u),
+              v(u, f),
+              v(i, d),
+              v(d, h),
+              v(o, p),
+              v(c, m),
+              v(c, w),
+              v(w, C),
+              v(C, _),
+              v(_, E),
+              v(E, F),
+              v(F, M),
+              v(M, S),
+              v(S, z),
+              v(z, N),
+              v(z, j),
+              v(z, L),
+              v(L, O),
+              v(L, A),
+              v(M, P),
+              v(P, R),
+              v(F, B),
+              v(B, T),
+              v(T, H),
+              v(B, I),
+              v(n, Z),
+              v(n, D),
+              v(D, G),
+              v(G, J),
+              v(G, K),
+              v(K, Q),
+              v(D, U),
+              v(U, V),
+              v(U, W),
+              v(W, X),
+              (nt = !0);
+          },
+          p: t,
+          i(t) {
+            nt || (Y && Y.end(1), et && et.end(1), (nt = !0));
+          },
+          o(t) {
+            (Y = tt(r, ut, { delay: 700 })),
+              (et = tt(D, ut, { delay: 200 })),
+              (nt = !1);
+          },
+          d(t) {
+            t && (g(n), Y && Y.end(), et && et.end()), rt();
+          },
+        };
+      }
+      function dt(t) {
+        const e = j();
+        return {
+          finish: function () {
+            e("finish");
+          },
+        };
+      }
+      class ht extends ot {
+        constructor(t) {
+          super(), at(this, t, dt, ft, c, []);
+        }
+      }
+      function pt(t, e, n) {
+        const r = Object.create(t);
+        return (r.card = e[n]), r;
+      }
+      function mt(t, e) {
+        var n,
+          r,
+          s,
+          a,
+          c,
+          i,
+          l,
+          u,
+          f,
+          d,
+          h,
+          p,
+          m,
+          y,
+          k,
+          _ = e.card.number + "",
+          E = e.card.french + "";
+        return {
+          key: t,
+          first: null,
+          c() {
+            (n = b("article")),
+              (r = b("div")),
+              (s = b("h1")),
+              (a = w(_)),
+              (i = x()),
+              (l = b("div")),
+              (u = b("h2")),
+              (f = w(E)),
+              (h = x()),
+              q(s, "class", "svelte-10bsf6b"),
+              q(r, "class", "card__front svelte-10bsf6b"),
+              q(u, "class", "svelte-10bsf6b"),
+              q(l, "class", "card__back svelte-10bsf6b"),
+              q(
+                n,
+                "class",
+                (p =
+                  o(e.card.isFlipped ? "card flip" : "card") +
+                  " svelte-10bsf6b")
+              ),
+              (this.first = n);
+          },
+          m(t, e) {
+            $(t, n, e),
+              v(n, r),
+              v(r, s),
+              v(s, a),
+              v(n, i),
+              v(n, l),
+              v(l, u),
+              v(u, f),
+              v(n, h),
+              (k = !0);
+          },
+          p(t, e) {
+            (k && !t.cards) || _ === (_ = e.card.number + "") || C(a, _),
+              (k && !t.cards) || E === (E = e.card.french + "") || C(f, E),
+              (k && !t.cards) ||
+                p ===
+                  (p =
+                    o(e.card.isFlipped ? "card flip" : "card") +
+                    " svelte-10bsf6b") ||
+                q(n, "class", p);
+          },
+          i(t) {
+            k ||
+              (c && c.end(1),
+              d && d.end(1),
+              H(() => {
+                y && y.end(1), m || (m = X(n, $t, {})), m.start();
+              }),
+              (k = !0));
+          },
+          o(t) {
+            (c = tt(r, ut, e.options)),
+              (d = tt(l, ut, e.options)),
+              m && m.invalidate(),
+              (y = tt(n, gt, { isFlipped: e.card.isFlipped })),
+              (k = !1);
+          },
+          d(t) {
+            t && (g(n), c && c.end(), d && d.end(), y && y.end());
+          },
+        };
+      }
+      function vt(t) {
+        var e,
+          n,
+          r,
+          s = [],
+          a = new Map();
+        let c = t.cards;
+        const o = (t) => t.card.id;
+        for (let e = 0; e < c.length; e += 1) {
+          let n = pt(t, c, e),
+            r = o(n);
+          a.set(r, (s[e] = mt(r, n)));
+        }
+        return {
+          c() {
+            e = b("main");
+            for (let t = 0; t < s.length; t += 1) s[t].c();
+            q(e, "class", "deck svelte-10bsf6b");
+          },
+          m(t, n) {
+            $(t, e, n);
+            for (let t = 0; t < s.length; t += 1) s[t].m(e, null);
+            r = !0;
+          },
+          p(t, n) {
+            const r = n.cards;
+            K(),
+              (s = (function (t, e, n, r, s, a, c, o, i, l, u, f) {
+                let d = t.length,
+                  h = a.length,
+                  p = d;
+                const m = {};
+                for (; p--; ) m[t[p].key] = p;
+                const v = [],
+                  $ = new Map(),
+                  g = new Map();
+                for (p = h; p--; ) {
+                  const t = f(s, a, p),
+                    o = n(t);
+                  let i = c.get(o);
+                  i ? r && i.p(e, t) : (i = l(o, t)).c(),
+                    $.set(o, (v[p] = i)),
+                    o in m && g.set(o, Math.abs(p - m[o]));
+                }
+                const b = new Set(),
+                  y = new Set();
+                function w(t) {
+                  U(t, 1), t.m(o, u), c.set(t.key, t), (u = t.first), h--;
+                }
+                for (; d && h; ) {
+                  const e = v[h - 1],
+                    n = t[d - 1],
+                    r = e.key,
+                    s = n.key;
+                  e === n
+                    ? ((u = e.first), d--, h--)
+                    : $.has(s)
+                    ? !c.has(r) || b.has(r)
+                      ? w(e)
+                      : y.has(s)
+                      ? d--
+                      : g.get(r) > g.get(s)
+                      ? (y.add(r), w(e))
+                      : (b.add(s), d--)
+                    : (i(n, c), d--);
+                }
+                for (; d--; ) {
+                  const e = t[d];
+                  $.has(e.key) || i(e, c);
+                }
+                for (; h; ) w(v[h - 1]);
+                return v;
+              })(s, t, o, 1, n, r, a, e, et, mt, null, pt)),
+              Q();
+          },
+          i(t) {
+            if (!r) {
+              for (let t = 0; t < c.length; t += 1) U(s[t]);
+              n ||
+                H(() => {
+                  (n = X(e, ut, { delay: 950 })).start();
+                }),
+                (r = !0);
+            }
+          },
+          o(t) {
+            for (let t = 0; t < s.length; t += 1) V(s[t]);
+            r = !1;
+          },
+          d(t) {
+            t && g(e);
+            for (let t = 0; t < s.length; t += 1) s[t].d();
+          },
+        };
+      }
+      function $t(t, { duration: e = 700, depth: n = 200 }) {
+        return {
+          duration: e,
+          css: (t) =>
+            `\n\t\t\t\t\topacity: ${it(t)};\n\t\t\t\t\ttransform: translateY(-${
+              100 * (1 - it(t))
+            }%) translateZ(${n * (1 - it(t))}px);\n\t\t\t\t`,
+        };
+      }
+      function gt(
+        t,
+        { duration: e = 700, depth: n = -200, isFlipped: r = !1 }
+      ) {
+        return {
+          duration: e,
+          css: (t) =>
+            `\n\t\t\t\t\ttransform: rotateY(${
+              r ? "-180deg" : "0deg"
+            }) translateZ(${
+              r ? -n * (1 - it(t)) : n * (1 - it(t))
+            }px);\n\t\t\t\t`,
+        };
+      }
+      function bt(t, e, n) {
+        const r = { duration: 700, easing: it };
+        let { cards: s } = e;
+        return (
+          (t.$set = (t) => {
+            "cards" in t && n("cards", (s = t.cards));
+          }),
+          { options: r, cards: s }
+        );
+      }
+      class yt extends ot {
+        constructor(t) {
+          super(), at(this, t, bt, vt, c, ["cards"]);
+        }
+      }
+      function wt(e) {
+        var n, r, a, c, o, i, l;
+        return {
+          c() {
+            (n = b("section")),
+              ((r = b("button")).textContent = "Flip"),
+              (c = x()),
+              ((o = b("button")).textContent = "New Card"),
+              q(r, "class", "svelte-1nqrb1f"),
+              q(o, "class", "svelte-1nqrb1f"),
+              q(n, "class", "controls svelte-1nqrb1f"),
+              (l = [k(r, "click", e.flip), k(o, "click", e.newCard)]);
+          },
+          m(t, e) {
+            $(t, n, e), v(n, r), v(n, c), v(n, o);
+          },
+          p: t,
+          i(t) {
+            a ||
+              H(() => {
+                (a = X(r, ut, { delay: 1e3 })).start();
+              }),
+              i ||
+                H(() => {
+                  (i = X(o, ut, { delay: 1030 })).start();
+                });
+          },
+          o: t,
+          d(t) {
+            t && g(n), s(l);
+          },
+        };
+      }
+      function xt(t) {
+        const e = j();
+        return {
+          flip: function () {
+            e("flip");
+          },
+          newCard: function () {
+            e("newCard");
+          },
+        };
+      }
+      class kt extends ot {
+        constructor(t) {
+          super(), at(this, t, xt, wt, c, []);
+        }
+      }
+      function qt(t) {
+        var e,
+          n,
+          r = new yt({ props: { cards: t.cards } }),
+          s = new kt({});
+        return (
+          s.$on("flip", t.handleFlip),
+          s.$on("newCard", t.handleNewCard),
+          {
+            c() {
+              r.$$.fragment.c(), (e = x()), s.$$.fragment.c();
+            },
+            m(t, a) {
+              nt(r, t, a), $(t, e, a), nt(s, t, a), (n = !0);
+            },
+            p(t, e) {
+              var n = {};
+              t.cards && (n.cards = e.cards), r.$set(n);
+            },
+            i(t) {
+              n || (U(r.$$.fragment, t), U(s.$$.fragment, t), (n = !0));
+            },
+            o(t) {
+              V(r.$$.fragment, t), V(s.$$.fragment, t), (n = !1);
+            },
+            d(t) {
+              rt(r, t), t && g(e), rt(s, t);
+            },
+          }
+        );
+      }
+      function Ct(e) {
+        var n,
+          r = new ht({});
+        return (
+          r.$on("finish", e.handleFinish),
+          {
+            c() {
+              r.$$.fragment.c();
+            },
+            m(t, e) {
+              nt(r, t, e), (n = !0);
+            },
+            p: t,
+            i(t) {
+              n || (U(r.$$.fragment, t), (n = !0));
+            },
+            o(t) {
+              V(r.$$.fragment, t), (n = !1);
+            },
+            d(t) {
+              rt(r, t);
+            },
+          }
+        );
+      }
+      function _t(t) {
+        var e,
+          n,
+          r,
+          s,
+          a = [Ct, qt],
+          c = [];
+        function o(t, e) {
+          return e.isLoading ? 0 : 1;
+        }
+        return (
+          (e = o(0, t)),
+          (n = c[e] = a[e](t)),
+          {
+            c() {
+              n.c(), (r = w(""));
+            },
+            m(t, n) {
+              c[e].m(t, n), $(t, r, n), (s = !0);
+            },
+            p(t, s) {
+              var i = e;
+              (e = o(0, s)) === i
+                ? c[e].p(t, s)
+                : (K(),
+                  V(c[i], 1, 1, () => {
+                    c[i] = null;
+                  }),
+                  Q(),
+                  (n = c[e]) || (n = c[e] = a[e](s)).c(),
+                  U(n, 1),
+                  n.m(r.parentNode, r));
+            },
+            i(t) {
+              s || (U(n), (s = !0));
+            },
+            o(t) {
+              V(n), (s = !1);
+            },
+            d(t) {
+              c[e].d(t), t && g(r);
+            },
+          }
+        );
+      }
+      function Et(t, e, n) {
+        let r = !0;
+        const s = () => {
+          const t = Math.floor(101 * Math.random()),
+            e = (function (t) {
+              const e = [
+                  { value: 0, french: "zero" },
+                  { value: 1, french: "un" },
+                  { value: 2, french: "deux" },
+                  { value: 3, french: "trois" },
+                  { value: 4, french: "quatre" },
+                  { value: 5, french: "cinq" },
+                  { value: 6, french: "six" },
+                  { value: 7, french: "sept" },
+                  { value: 8, french: "huit" },
+                  { value: 9, french: "neuf" },
+                  { value: 10, french: "dix" },
+                  { value: 11, french: "onze" },
+                  { value: 12, french: "douze" },
+                  { value: 13, french: "treize" },
+                  { value: 14, french: "quatorze" },
+                  { value: 15, french: "quinze" },
+                  { value: 16, french: "seize" },
+                  { value: 20, french: "vingt" },
+                  { value: 30, french: "trente" },
+                  { value: 40, french: "quarante" },
+                  { value: 50, french: "cinquante" },
+                  { value: 60, french: "soixante" },
+                  { value: 70, french: "soixante-dix" },
+                  { value: 80, french: "quatre-vingts" },
+                  { value: 90, french: "quatre-vingt-dix" },
+                  { value: 100, french: "cent" },
+                ],
+                n = e.find(({ value: e }) => e === t);
+              if (n) return n.french;
+              let r = 10 * parseInt(t.toString()[0], 10),
+                s = parseInt(t.toString()[1], 10),
+                a = "-";
+              1 === s && r >= 20 && r <= 70 && (a = " et "),
+                (70 === r || 90 === r) && s < 7 && ((r -= 10), (s += 10));
+              let { french: c } = e.find(({ value: t }) => t === r);
+              const { french: o } = e.find(({ value: t }) => t === s);
+              return 80 === r && (c = c.slice(0, c.length - 1)), `${c}${a}${o}`;
+            })(t);
+          return { number: t, french: e, isFlipped: !1, id: Math.random() };
+        };
+        let a = [s()];
+        return {
+          isLoading: r,
+          handleFinish: () => n("isLoading", (r = !1)),
+          cards: a,
+          handleFlip: () => n("cards", (a[0].isFlipped = !a[0].isFlipped), a),
+          handleNewCard: () => n("cards", (a = [s()])),
+        };
+      }
+      return new (class extends ot {
+        constructor(t) {
+          super(), at(this, t, Et, _t, c, []);
+        }
+      })({ target: document.body });
+    })();
+  </script>
+</html>
